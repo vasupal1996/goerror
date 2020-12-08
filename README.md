@@ -171,6 +171,7 @@ Example:
 	>> map[message:error1 type:NoType]
 	err1 = errors.SetContext(err1, "email", "email not found")
 	errMap = errors.Map(err1)
+	fmt.Println(errMap)
 	>> map[field:email message:email not found type:NoType]
 
 ### Convert error to JSON
@@ -183,11 +184,11 @@ Example:
 	err1 := errors.New("error1", nil)
 	errJSON := errors.JSON(err1)
 	
-	fmt.Println(string(errMap))
+	fmt.Println(string(errJSON))
 	>> {"message":"error1","type":"NoType"}
 	
 	err1 = errors.SetContext(err1, "email", "email not found")
 	errJSON = errors.JSON(err1)
 	
-	fmt.Println(string(errMap))
+	fmt.Println(string(errJSON))
 	>> {"field":"email","message":"email not found","type":"NoType"}
