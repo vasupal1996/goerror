@@ -8,7 +8,7 @@ import (
 // Type is the type of an error
 type Type string
 
-const (
+var (
 	// NoType default error type when no error type is specified
 	NoType Type = "NoType"
 	// BadRequest indicates that the server cannot or will not process the request due to something that is perceived to be a client error

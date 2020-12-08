@@ -412,8 +412,7 @@ func TestIs(t *testing.T) {
 }
 
 func TestAs(t *testing.T) {
-	eType := NotFound
-	eType1 := BadRequest
+
 	type args struct {
 		err    error
 		target error
@@ -434,23 +433,23 @@ func TestAs(t *testing.T) {
 		{
 			name: "goError comparison when error type is specified",
 			args: args{
-				err:    New("test error", &eType),
-				target: New("test error", &eType),
+				err:    New("test error", &NotFound),
+				target: New("test error", &NotFound),
 			},
 			want: true,
 		},
 		{
 			name: "goError comparison when error different type is specified",
 			args: args{
-				err:    New("test error", &eType1),
-				target: New("test error", &eType),
+				err:    New("test error", &BadRequest),
+				target: New("test error", &NotFound),
 			},
 			want: false,
 		},
 		{
 			name: "goError comparison with generic go error",
 			args: args{
-				err:    New("test error", &eType1),
+				err:    New("test error", &NotFound),
 				target: fmt.Errorf("test error"),
 			},
 			want: false,

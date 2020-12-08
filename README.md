@@ -45,8 +45,8 @@ Example:
 
 Example:
 	
-    errType := errors.BadRequest
-    err :=  errors.New("error message", &errType)
+
+    err :=  errors.New("error message", &errors.BadRequest)
     fmt.Println(err)
     >> error message
 
@@ -82,8 +82,7 @@ Syntax:
 
 Example:
 
-    notFoundErrorType := errors.NotFound
-    err :=  errors.SetType(err, &notFoundErrorType)
+    err :=  errors.SetType(err, &errors.NotFound)
   ---
     var customErrorType errors.Type = "CustomErrorType"
     err :=  errors.SetType(err, &customErrorType)
@@ -151,8 +150,7 @@ Example:
 	>>true 
 	// Because of NoType (default)
 	
-	errType := errors.BadRequest
-	err3 := errors.New("error2", &errType)
+	err3 := errors.New("error2", &errors.BadRequest)
 	isSameType = errors.As(err3, err1)
 	
 	fmt.Println(isSameType)
