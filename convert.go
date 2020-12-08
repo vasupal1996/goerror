@@ -2,8 +2,8 @@ package goerror
 
 import "encoding/json"
 
-// goMap object of the error
-func goMap(err error) map[string]interface{} {
+// Map object of the error
+func Map(err error) map[string]interface{} {
 	emptyCtx := context{}
 	var errMap = make(map[string]interface{})
 	if customErr, ok := err.(*goError); ok && customErr.context != emptyCtx {
@@ -17,8 +17,8 @@ func goMap(err error) map[string]interface{} {
 	return errMap
 }
 
-// goJSON convert error object into bytes json
-func goJSON(err error) []byte {
+// JSON convert error object into bytes json
+func JSON(err error) []byte {
 	jsonStr, _ := json.Marshal(goMap(err))
 	return jsonStr
 }
