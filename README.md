@@ -16,12 +16,12 @@
 
 Let's look at the some code snippets. But before this, make sure to download the package using
 
-    go get -v github.com/vasupal1996/goError
+    go get -v github.com/vasupal1996/goerror
    
    and import the package as
 
     import  (
-	    errors "github.com/vasupal1996/goError"
+	    errors "github.com/vasupal1996/goerror"
     )
 
 ### Create error
@@ -36,14 +36,19 @@ Syntax:
 Example:
 
     err := errors.New("error message", nil)
+    fmt.Println(err)
+    >> error message
 
 > Note: when you don't specify any error type *NoType* is set by default.
 
 #### 2. Create an error with error type
 
 Example:
-
-    err :=  errors.New("error message", errors.BadRequest)
+	
+    errType := errors.BadRequest
+    err :=  errors.New("error message", &errType)
+    fmt.Println(err)
+    >> error message
 
 ### Add context to error
 
@@ -125,7 +130,7 @@ Example:
 	>>false
 	
 	err3 := err1
-	isSame := errors.Is(err3, err2)
+	isSame = errors.Is(err3, err1)
 	
 	fmt.Println(isSame)
 	>>true
@@ -148,7 +153,41 @@ Example:
 	
 	errType := errors.BadRequest
 	err3 := errors.New("error2", &errType)
-	isSameType := errors.As(err3, err1)
+	isSameType = errors.As(err3, err1)
 	
 	fmt.Println(isSameType)
 	>>false
+
+### Convert error to Map
+
+Syntax:
+
+	errors.Map(error_1 error) map[string]interface{}
+Example:
+
+	err1 := errors.New("error1", nil)
+	errMap := errors.Map(err1)
+	fmt.Println(errMap)
+	>> map[message:error1 type:NoType]
+	err1 = errors.SetContext(err1, "email", "email not found")
+	errMap = errors.Map(err1)
+	>> map[field:email message:email not found type:NoType]
+
+### Convert error to JSON
+
+Syntax:
+
+	errors.Map(error_1 error) map[string]interface{}
+Example:
+
+	err1 := errors.New("error1", nil)
+	errJSON := errors.JSON(err1)
+	
+	fmt.Println(string(errMap))
+	>> {"message":"error1","type":"NoType"}
+	
+	err1 = errors.SetContext(err1, "email", "email not found")
+	errJSON = errors.JSON(err1)
+	
+	fmt.Println(string(errMap))
+	>> {"field":"email","message":"email not found","type":"NoType"}
