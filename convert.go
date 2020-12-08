@@ -19,6 +19,6 @@ func Map(err error) map[string]interface{} {
 
 // JSON convert error object into bytes json
 func JSON(err error) []byte {
-	jsonStr, _ := json.Marshal(goMap(err))
+	jsonStr, _ := json.Marshal(Map(err))
 	return jsonStr
 }

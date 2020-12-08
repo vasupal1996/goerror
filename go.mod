@@ -1,4 +1,4 @@
-module goerror
+module github.com/vasupal1996/goerror
 
 go 1.14
 
